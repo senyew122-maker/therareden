@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>The Rare Den Collectibles</title>
+<link rel="stylesheet" href="style.css">
+<style>
+/* 轮播关键 */
+.slider-container{
+  width:100%;
+  max-width: 600px;
+  margin: 20px auto 0;
+  overflow: hidden;
+}
+
+#slider{
+  width: 100%;
+  border-radius: 10px;
+  object-fit: cover;
+}
+.dots{
+  text-align: center;
+  margin-top: 40px;
+  line-height: 40px;
+}
+.dot{
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: inline-block;
+  margin:5px;
+  color: gray;
+}
+
+.active{
+  color: white;
+}
+
+.slider-box{
+width: 800px;
+height: 450px;
+margin:auto;
+display:flex;
+overflow: hidden;
+padding-top:80px;
+}
+
+.slider-box img{
+  width: 100%;
+  object-fit:cover;
+  object-position: center;
+}
+
+ 
+</style>
+</head>
+<body>
+
+      <div class="header-box">
+    <div class="logo-box">
+         <div style="display:flex;justify-content:space-between;align-items:center;padding:15px 30px;">
+    <img src="123/logo.jpg" class="logo">
+    <h1 class="title">The Rare Den Collectibles</h1>
+  </div>
+</div>
+   
+ <!-- 未登录状态 -->
+  <div id="authArea">
+ 
+ <a href="#" onclick="login()">
+  <div class="login">Sign up/Sign in</div>
+ </a>
+ </div>
+  
+   <!-- 已登录状态 -->
+    <div id="userArea" style="display: none;">
+
+      <div class="user-icons">
+
+        <span class="icon">🔔</span>
+        <span class="icon">🛒</span>
+
+         <!-- Profile（下拉） -->
+        <div class="profile-wrapper">
+
+        <span class="icon" onclick="toggleProfileMenu()">
+          👤 
+        </span>
+
+        <div id="profileMenu" class="profile-menu">
+
+          <div class="menu-item">Settings</div>
+          <div class="menu-item" onclick="logOut()">Logout</div>
+        </div>
+      </div>
+    </div>
+    </div>
+      </div>
+
+ <nav>
+  <a href="index.html">Home</a>
+  <a href="product.html">Product</a>
+  <a href="event.html">Event</a>
+
+  <div class="contact-wrapper">
+
+  <div class="contact-btn" id="contactBtn">
+    Contact
+    <span id="contact-arrow">▼</span>
+  </div>
+
+  <div class="contact-sidebar" id="contactSidebar">
+
+    <a href="https://www.facebook.com/profile.php?id=61580062782317"
+    target="_blank"
+    rel="noopener noreferrer">
+      <span>></span>
+      <span>Facebook</span>
+    </a>
+
+    <a href="https://www.instagram.com/theraredencollectibles/"
+    target="_blank"
+    rel="noopener noreferrer">
+      <span>></span>
+      <span>Instagram</span>
+    </a>
+
+    <a href="https://wa.me/60128373141"
+    target="_blank"
+    rel="noopener noreferrer">
+     <span>></span>
+      <span>Whatsapp</span>
+    </a>
+  </div>
+  </div>
+ </nav>
+
+ <div class="slider-box">
+  <img id="slider" src="123/rare-den.jpg">
+ </div>
+  <div class="dots">
+     <span class="dot"onclick="setImage(0)">●</span>
+     <span class="dot"onclick="setImage(1)">●</span>
+      <span class="dot"onclick="setImage(2)">●</span>
+       <span class="dot"onclick="setImage(3)">●</span>
+       <span class="dot"onclick="setImage(4)">●</span>
+
+</div>
+ </div>
+
+ <script>
+  const image=[
+    "123/rare-den.jpg",
+    "123/Ga.jpg",
+    "123/Optcg.jpg",
+    "123/Ua.jpg",
+    "123/Ptcg.jpg"
+  ];
+
+  let current=0;
+
+  function showImage(index){
+    document.getElementById("slider").src=image[index];
+
+  const dot=document.getElementsByClassName("dot");
+  for(let i=0;i<dot.length;i++){
+    dot[i].classList.remove("active");
+  }
+
+dot[index].classList.add("active");
+  }
+
+ function nextImage() {
+  current++;
+  if(current>=image.length){
+    current=0;
+  }
+  showImage(current)
+ }
+
+ function setImage(index){
+  current=index;
+  showImage(index);
+ }
+
+ setInterval(nextImage,3000);
+ showImage(0);
+ </script>
+
+<footer class="footer">
+  <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 10px;">
+<div>
+  <p>📌:26-1, Jalan KS 3, Kepayang Sentral, 70200 Seremban, Negeri Sembilan</p>
+   <p>© 2026 The Rare Den</p>
+  </div>
+
+  <div>
+<p>📞:012-837 3141</p>
+ <p>📧:therareden@gmail.com</p>
+  </div>
+  </div>
+</footer>
+<script src="contact.js"></script>
+</body>
+</html>

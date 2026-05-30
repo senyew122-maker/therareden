@@ -1,0 +1,497 @@
+/* =========================
+   TITLE
+========================= */
+.page-title{
+display:flex;
+align-items: center;
+justify-content: center;
+gap:40px;
+
+font-size: 50px;
+font-weight: bold;
+letter-spacing: 5px;
+color: gray;
+
+
+text-shadow: 
+-2px -2px 0 black,
+2px -2px 0 black,
+-2px 2px 0 black,
+2px 2px 0 black;
+}
+
+.page-title::before,
+.page-title::after{
+    content: "";
+    flex:1;
+    height: 3px;
+
+    background:linear-gradient(
+        to right,
+        transparent,
+        gray,
+        transparent
+    );
+}
+
+
+/* =========================
+   PAGE WRAPPER
+========================= */
+.page{
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+}
+
+
+/* =========================
+   LAYER
+========================= */
+.event-list,
+.sidebar,
+.close-btn,
+.content{
+    transition:
+     0.6s ease,
+     opacity 0.6s ease
+}
+
+/* =========================
+   SIDEBAR (永远左边)
+========================= */
+/* 左边 */
+.sidebar{
+width:120px;
+min-width: 120px;
+padding: 10px;
+
+height: auto;
+
+background: rgba(255,255,255,0.08);
+ backdrop-filter: blur(20px);
+color:white;
+ border: 2px solid white;
+  border-radius: 30px;
+
+display: flex;
+flex-direction: column;
+
+position: absolute;
+left: 80px;
+
+box-sizing: border-box;
+opacity: 0;
+
+transform: translateX(-30px);
+
+transition: 
+transform 0.6s ease,
+opacity 0.6s ease;
+}
+
+.sidebar.show{
+    opacity: 1;
+
+    pointer-events: auto;
+
+    transform: translateX(0);
+}
+
+/* =========================
+   CLOSE BUTTON
+========================= */
+.close-btn{
+    width: 90px;
+    height: 90px;
+
+    border: 2px solid white;
+    cursor: pointer;
+
+    font-size: 30px;
+    padding-right: 20px;
+
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(20px);
+
+    border-radius: 30px;
+
+    position: absolute;
+    top: 50%;
+    left: calc(100% + 50px);
+
+
+
+    transform: 
+    translateY(-50%)
+    translateX(-20px);
+
+    opacity: 0;
+    pointer-events: none;
+
+    transition:
+    transform 0.6s ease,
+    opacity 0.6s ease;
+}
+
+.close-btn.show{
+    opacity: 1;
+    pointer-events: auto;
+
+    transform:
+    translateY(-50%)
+    translateX(0);
+}
+/* =========================
+   SIDEBAR SLOT
+========================= */
+.sidebar-slot{
+    margin-top:20px ;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+ /* =========================
+   SIDEBAR ICON
+========================= */
+.sidebar-icon{
+    width: 100px;
+    height: 100px;
+
+    cursor: pointer;
+
+    border-radius: 10px;
+
+
+    overflow: hidden;
+
+    opacity: 0.8;
+
+    transition: 0.25s ease;
+}
+
+/* hover */
+.sidebar-icon:hover{
+    opacity: 1;
+    transform: scale(1.1);
+
+}
+
+/* active icon */
+.sidebar-icon.active{
+    opacity: 1;
+    outline: 2px solid white;
+    transform: scale(0.8);
+}
+
+/* sidebar image */
+.sidebar-icon img{
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    display: block;
+
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.sidebar-icon span{
+    font-size: 20px;
+    font-weight: bold;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: 100%;
+    
+}
+
+/* =========================
+   MAIN AREA
+========================= */
+.main{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    width: 100%;
+    min-height: 100vh;
+
+  padding-top: 30px;
+  box-sizing: border-box;
+  gap: 20px;
+}
+
+/* =========================
+   EVENT LIST
+========================= */
+.event-list{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+
+    align-items:center;
+    justify-content: center;
+    
+    width: 100%;
+
+    opacity: 1;
+
+    transition: 
+    transform 0.6s ease, opacity 0.6s ease;
+}
+
+/* hidden */
+.event-list.hide{
+    opacity: 0;
+
+    transform: 
+    translateX(-50%)
+    translateY(40px);
+
+    pointer-events: none;
+}
+
+/* =========================
+   GAME CARD
+========================= */
+.game-card{
+    position: relative;
+
+    width:min(800px,100%);
+    height: 200px;
+    background: transparent;
+
+     flex-shrink: 0;
+    overflow: hidden;
+    cursor: pointer;
+    
+    overflow: hidden;
+}
+
+/* corner border */
+.game-card::before,
+.game-card::after{
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+
+     background: 
+    /* 左上 */
+      linear-gradient(white,white)top left,
+      linear-gradient(white,white)top left,
+
+     /* 右上 */
+      linear-gradient(white,white)top right,
+      linear-gradient(white,white)top right,
+
+    /* 左下 */
+      linear-gradient(white,white)bottom left,
+      linear-gradient(white,white)bottom left,
+
+     /* 右下 */
+      linear-gradient(white,white)bottom right,
+      linear-gradient(white,white)bottom right;
+
+    background-repeat: no-repeat;
+
+    background-size: 
+    25px 2px,2px 25px,/* 左上 横 + 竖 */
+    25px 2px,2px 25px, /* 右上 */
+    25px 2px,2px 25px,/* 左下 */
+    25px 2px,2px 25px; /* 右下 */
+
+transition: all 0.5s ease;
+}
+
+.game-card img{
+        object-fit:cover;
+        width: 100%;
+        height: 100%;
+        display: block;
+}
+
+/* =========================
+   CONTENT
+========================= */
+.content{
+
+    position: absolute;
+
+    left: 390px;
+
+    transform: 
+    translateX(-50%)
+    translateY(40px);
+
+   display: flex;
+
+   justify-content: center;
+   align-items: center;
+
+   padding: 0;
+   pointer-events: none;
+
+   opacity: 0;
+
+   transition: 
+   transform 0.6s ease,
+   opacity 0.6s ease;
+}
+
+.content.show{
+    opacity: 1;
+
+    pointer-events: auto;
+
+    transform: 
+    translateX(0)
+    translateY(0);
+}
+
+.event-content{
+    width: 1450px;
+    height: 1300px;
+
+    background: rgba(255,255,255,0.08);
+
+    outline: 2px solid white;
+
+    padding: 30px;
+
+    border-radius: 30px;
+
+    box-sizing: border-box;
+
+}
+
+.sidebar,
+.content{
+    top: 400px;
+}
+
+/* =========================
+   EVENT CARD
+========================= */
+.event-grid{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.event-card{
+    width: 800px;
+
+    padding: 15px;
+
+    border: 1px solid #ccc;
+
+    border-radius: 10px;
+
+    background: white;
+
+    color: black;
+
+    cursor: pointer;
+
+    transition: 0.3s ease;
+}
+
+.event-card:hover{
+    transform: scale(1.02);
+}
+
+.event-title{
+    font-size: 20px;
+
+    margin-bottom: 10px;
+}
+
+.divider{
+    width: 100%;
+
+    height: 1px;
+
+    background: gray;
+
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.event-date{
+    font-size: 20px;
+}
+
+#no-event{
+   height: 100%;
+
+   justify-content: center;
+   align-items: center;
+
+    text-align: center;
+
+    font-size: 30px;
+
+    font-weight: bold;
+
+    display: none;
+}
+
+#pagination{
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-top: 40px;
+
+    flex-wrap: wrap;
+}
+
+#pagination button{
+    width: 45px;
+    height: 45px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#pagination button:hover{
+    transform: scale(1.05);
+} 
+
+.active-page{
+    background:black;
+    color: white;
+}
+
+.dots{
+    padding: 10px 15px;
+    
+    border: 2px solid white;
+
+    border-radius: 10px;
+
+    font-size: 30px;
+}

@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Event</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="event.css">
+</head>
+<body>
+  
+    <div class="header-box">
+    <div class="logo-box">
+         <div style="display:flex;justify-content:space-between;align-items:center;padding:15px 30px;">
+    <img src="123/logo.jpg" class="logo">
+    <h1 class="title">The Rare Den Collectibles</h1>
+  </div>
+</div>
+   
+ <!-- 未登录状态 -->
+  <div id="authArea">
+ 
+ <a href="#" onclick="login()">
+  <div class="login">Sign up/Sign in</div>
+ </a>
+ </div>
+  
+   <!-- 已登录状态 -->
+    <div id="userArea" style="display: none;">
+
+      <div class="user-icons">
+
+        <span class="icon">🔔</span>
+        <span class="icon">🛒</span>
+
+         <!-- Profile（下拉） -->
+        <div class="profile-wrapper">
+
+        <span class="icon" onclick="toggleProfileMenu()">
+          👤 
+        </span>
+
+        <div id="profileMenu" class="profile-menu">
+
+          <div class="menu-item">Settings</div>
+          <div class="menu-item" onclick="logOut()">Logout</div>
+        </div>
+      </div>
+    </div>
+    </div>
+      </div>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="product.html">Product</a>
+  <a href="event.html">Event</a>
+
+  <div class="contact-wrapper">
+
+  <div class="contact-btn" id="contactBtn">
+    Contact
+    <span id="contact-arrow">▼</span>
+  </div>
+
+  <div class="contact-sidebar" id="contactSidebar">
+
+    <a href="https://www.facebook.com/profile.php?id=61580062782317"
+    target="_blank"
+    rel="noopener noreferrer">
+      <span>></span>
+      <span>Facebook</span>
+    </a>
+
+    <a href="https://www.instagram.com/theraredencollectibles/"
+    target="_blank"
+    rel="noopener noreferrer">
+      <span>></span>
+      <span>Instagram</span>
+    </a>
+
+    <a href="https://wa.me/60128373141"
+    target="_blank"
+    rel="noopener noreferrer">
+     <span>></span>
+      <span>Whatsapp</span>
+    </a>
+  </div>
+  </div>
+ </nav>
+
+<!-- =========================
+TITLE
+========================= -->
+  <h1 class="page-title">EVENT</h1>
+
+  <div class="page">
+
+    <div class="viewer">
+         <!-- SIDEBAR（独立层） -->
+    <!-- sidebar -->
+     <div class="sidebar">
+       <!-- close button -->
+         <button class="close-btn">《</button>
+  <div class="sidebar-slot"></div>
+  </div>
+  <!-- CONTENT -->
+     <div class="content">
+      <div class="event-content">
+          <h2 id="no-event" style="display: none;">NO EVENT</h2>
+          <div id="event-grid" class="event-grid"></div>
+          <div id="pagination"></div>
+      </div>
+     </div>
+     </div>
+
+     <!-- =========================
+         MAIN
+    ========================== -->
+<div class="main">
+    <!-- EVENT LIST -->
+  <div class="event-list">
+    <div class="game-card"><img src="123/all-tcg.png" alt=""></div>
+    <div class="game-card"><img src="123/ga-event.png" alt=""></div>
+    <div class="game-card"><img src="123/pokemon-event.png" alt=""></div>
+    <div class="game-card"><img src="123/op-event.png" alt=""></div>
+    <div class="game-card"><img src="123/ua-event.png" alt=""></div>
+    <div class="game-card"><img src="123/dtcg-event.png" alt=""></div>
+    <div class="game-card"><img src="123/gundam-event.jpg" alt=""></div>
+    </div>
+
+    
+    </div>
+  </div>
+<script>
+  /* =========================
+   DATA
+========================= */
+const map=[
+  {
+  category:"all",
+  icon:"ALL"
+  },
+  {
+    category:"Grand Archive",
+    icon:"123/Galogo.png",
+    events:[
+      {
+        title:"Grand Archieve Shop Battle",
+        date:"",
+        link:""
+      },
+       {
+        title:"Grand Archieve Shop Battle",
+        date:"",
+        link:""
+      },
+       {
+        title:"Grand Archieve Shop Battle",
+        date:"",
+        link:""
+      },
+       {
+        title:"Grand Archieve Shop Battle",
+        date:"",
+        link:""
+      },
+       {
+        title:"Grand Archieve Shop Battle",
+        date:"",
+        link:""
+      },
+       {
+        title:"Grand Archieve Shop Battle",
+        date:"",
+        link:""
+      },
+       {
+        title:"Grand Archieve Shop Battle",
+        date:"",
+        link:""
+      },
+       {
+        title:"Grand Archieve Shop Battle",
+        date:"",
+        link:""
+      },
+       {
+        title:"Grand Archieve Shop Battle",
+        date:"",
+        link:""
+      },
+       {
+        title:"Grand Archieve Shop Battle",
+        date:"",
+        link:""
+      },
+       {
+        title:"Grand Archieve Shop Battle",
+        date:"",
+        link:""
+      }
+    ]
+  },
+  {
+    category:"Pokemon TCG",
+    icon:"123/Ptcglogo.png",
+    events:[]
+  },
+  {
+    category:"One Piece TCG",
+    icon:"123/Oplogo.png",
+    events:[
+      {
+        title:"[June] Meet-up event [ID,MY,PH,SG] ",
+        date:"2026年06月03日 (週三) 20:00",
+        link:"https://www.bandai-tcg-plus.com/event/6624898?applicationOpenFlg=false&countryCode[]=MY&distance=&endDate=&eventFormatId=&eventSeriesId=&favorite=false&gameFormatId=&infinite=false&keyword=&limit=20&offset=0&organizerId=&organizerName=&postcode=&prefCode[]=MY-05&startDate=2026-05-27&streetAddress="
+      },
+      {
+        title:"[June] Standard Battle [ID,MY,PH,SG]",
+        date:"2026年06月05日 (週五) 20:00",
+        link:"https://www.bandai-tcg-plus.com/event/6624902?applicationOpenFlg=0&countryCode[]=MY&currentLat&currentLng&distance=&endDate=&eventSeriesId=&favorite=0&gameFormatId=&gameTitleId=8&keyword=&limit=20&offset=0&order=1&organizerName=&pastEventDisplayFlg=0&postcode=&prefCode[]=MY-05&startDate=2026-05-27&streetAddress="
+      },
+      {
+        title:"[June] Meet-up event [ID,MY,PH,SG] ",
+        date:"2026年06月12日 (週五) 20:00",
+        link:"https://www.bandai-tcg-plus.com/event/6624903?applicationOpenFlg=false&countryCode[]=MY&distance=&endDate=&eventFormatId=&eventSeriesId=&favorite=false&gameFormatId=&infinite=false&keyword=&limit=20&offset=0&organizerId=&organizerName=&postcode=&prefCode[]=MY-05&startDate=2026-05-27&streetAddress="
+      },
+      {
+        title:"[July] Meet-up event [ID,MY,PH,SG] ",
+        date:"2026年07月01日 (週三) 20:00",
+        link:"https://www.bandai-tcg-plus.com/event/7121573?applicationOpenFlg=false&countryCode[]=MY&distance=&endDate=&eventFormatId=&eventSeriesId=&favorite=false&gameFormatId=&infinite=false&keyword=&limit=20&offset=0&organizerId=&organizerName=&postcode=&prefCode[]=MY-05&startDate=2026-05-27&streetAddress="
+      },
+      {
+        title:"[July] Standard Battle [ID,MY,PH,SG] ",
+        date:"2026年07月03日 (週五) 20:00",
+        link:""
+      },
+      {
+        title:"[July] Meet-up event [ID,MY,PH,SG] ",
+        date:"2026年07月08日 (週三) 20:00",
+        link:""
+      },
+      {
+        title:"[July] Standard Battle [ID,MY,PH,SG] ",
+        date:"2026年07月10日 (週五) 20:00",
+        link:""
+      }
+    ]
+  },
+  {
+    category:"Union Arena",
+    icon:"123/Ualogo.png",
+    events:[
+      {
+       title:"[June] MEETUP EVENT [ID,MY,PH,SG] ",
+       date:"2026年06月09日 (週二) 21:00",
+       link:"https://www.bandai-tcg-plus.com/event/6625000?applicationOpenFlg=0&countryCode[]=MY&distance=&endDate=&eventFormatId=&eventSeriesId=&favorite=0&gameFormatId=&infinite=false&keyword=&limit=20&offset=0&organizerId=&organizerName=&postcode=&startDate=2026-05-26&streetAddress="
+       },
+      {
+        title:"[June] UNI-TICKET GET BATTLE [ID,MY,PH,SG] ",
+        date:"2026年06月16日 (週二) 21:00",
+        link:"https://www.bandai-tcg-plus.com/event/6625004?applicationOpenFlg=0&countryCode[]=MY&distance=&endDate=&eventFormatId=&eventSeriesId=&favorite=0&gameFormatId=&infinite=false&keyword=&limit=20&offset=0&organizerId=&organizerName=&postcode=&prefCode[]=&startDate=2026-05-27&streetAddress="
+      },
+      {
+        title:"[July] MEETUP EVENT [ID,MY,PH,SG] ",
+        date:"2026年06月23日 (週二) 21:00",
+        link:"https://www.bandai-tcg-plus.com/event/6625004?applicationOpenFlg=false&countryCode[]=MY&distance=&endDate=&eventFormatId=&eventSeriesId=&favorite=false&gameFormatId=&infinite=false&keyword=&limit=20&offset=0&organizerId=&organizerName=&postcode=&startDate=2026-05-27&streetAddress="
+      },
+      {
+        title:"[July] MEETUP EVENT [ID,MY,PH,SG]",
+        date:"2026年07月08日 (週三) 20:00",
+        link:"https://www.bandai-tcg-plus.com/event/7032569?applicationOpenFlg=false&countryCode[]=MY&distance=&endDate=&eventFormatId=&eventSeriesId=&favorite=false&gameFormatId=&infinite=false&keyword=&limit=20&offset=0&organizerId=&organizerName=&postcode=&startDate=2026-05-27&streetAddress="
+      },
+      {
+        title:"[July] UNI-TICKET GET BATTLE [ID,MY,PH,SG] ",
+        date:"2026年07月14日 (週二) 20:00",
+        link:"https://www.bandai-tcg-plus.com/event/7032559?applicationOpenFlg=false&countryCode[]=MY&distance=&endDate=&eventFormatId=&eventSeriesId=&favorite=false&gameFormatId=&infinite=false&keyword=&limit=20&offset=0&organizerId=&organizerName=&postcode=&startDate=2026-05-27&streetAddress="
+      },
+      {
+        title:"[July] UNI-TICKET GET BATTLE [ID,MY,PH,SG] ",
+        date:"2026年07月21日 (週二) 20:00",
+        link:"https://www.bandai-tcg-plus.com/event/7032560?applicationOpenFlg=false&countryCode[]=MY&distance=&endDate=&eventFormatId=&eventSeriesId=&favorite=false&gameFormatId=&infinite=false&keyword=&limit=20&offset=0&organizerId=&organizerName=&postcode=&startDate=2026-05-27&streetAddress="
+      }
+    ]
+  },
+  {
+    category:"Digimon TCG",
+    icon:"123/dtcglogo.png",
+    events:[
+      {
+        title:"[June] Tamer Battle [ID,MY,PH,SG] ",
+        date:"2026年06月16日 (週二) 19:00",
+        link:"https://www.bandai-tcg-plus.com/event/6624955?applicationOpenFlg=0&countryCode[]=MY&distance=&endDate=&eventFormatId=&eventSeriesId=&favorite=0&gameFormatId=&infinite=false&keyword=&limit=20&offset=0&organizerId=&organizerName=&postcode=&startDate=2026-05-27&streetAddress="
+      },
+      {
+        title:"[June] Tamer Battle [ID,MY,PH,SG] ",
+        date:"2026年06月23日 (週二) 19:00",
+        link:"https://www.bandai-tcg-plus.com/event/6624956?applicationOpenFlg=false&countryCode[]=MY&distance=&endDate=&eventFormatId=&eventSeriesId=&favorite=false&gameFormatId=&infinite=false&keyword=&limit=20&offset=0&organizerId=&organizerName=&postcode=&startDate=2026-05-27&streetAddress="
+      },
+      {
+        title:"[July] Tamer Battle [ID,MY,PH,SG] ",
+        date:"2026年07月08日 (週三) 20:00",
+        link:"https://www.bandai-tcg-plus.com/event/7032552?applicationOpenFlg=false&countryCode[]=MY&distance=&endDate=&eventFormatId=&eventSeriesId=&favorite=false&gameFormatId=&infinite=false&keyword=&limit=20&offset=0&organizerId=&organizerName=&postcode=&startDate=2026-05-27&streetAddress="
+      }
+    ]
+  },
+  {
+    category:"Gundam TCG",
+    icon:"123/gundamlogo.png",
+    events:[
+      {
+        title:"[Jul-Sep] Shop battle 2026 season3 [ID,MY,PH,SG] ",
+        date:"2026年07月11日 (週六) 15:00",
+        link:""
+      },
+      {
+        title:"[Jul-Sep] Shop battle 2026 season3 [ID,MY,PH,SG] ",
+        date:"2026年07月18日 (週六) 15:00",
+        link:""
+      },
+      {
+        title:"[Jul-Sep] Shop battle 2026 season3 [ID,MY,PH,SG] ",
+        date:"2026年07月25日 (週六) 15:00",
+        link:""
+      },
+      {
+        title:"[Jul-Sep] Shop battle 2026 season3 [ID,MY,PH,SG] ",
+        date:"2026年08月01日 (週六) 15:00",
+        link:""
+      },
+      {
+        title:"[Jul-Sep] Shop battle 2026 season3 [ID,MY,PH,SG] ",
+        date:"2026年08月08日 (週六) 15:00",
+        link:""
+      },
+      {
+        title:"[Jul-Sep] Shop battle 2026 season3 [ID,MY,PH,SG] ",
+        date:"2026年08月15日 (週六) 15:00",
+        link:""
+      }
+    ]
+  }
+]
+/* =========================
+   DOM
+========================= */
+const cards=document.querySelectorAll(".game-card");
+
+const sidebar=document.querySelector(".sidebar");
+const sidebarSlot=document.querySelector(".sidebar-slot");
+
+const eventList=document.querySelector(".event-list");
+
+const closeBtn=document.querySelector(".close-btn");
+
+const content=document.querySelector(".content");
+const eventContent=document.querySelector(".event-content");
+
+const noEvent=document.getElementById("no-event");
+
+const grid=document.getElementById("event-grid");
+
+const pagination=document.getElementById("pagination");
+
+let currentEvents=[];
+
+let currentPage=1;
+
+const pageSize=6;
+
+
+/* =========================
+   CLICK EVENT CARD
+========================= */
+cards.forEach((card,i)=>{
+  card.addEventListener("click",()=>{
+    /* UI SWITCH */
+    eventList.classList.add("hide");
+
+    sidebar.classList.add("show");
+
+    closeBtn.classList.add("show");
+
+    content.classList.add("show");
+
+    /* RENDER SIDEBAR ICON */
+    renderSidebar(i);
+
+    /* UPDATE CONTENT */
+    if(map[i].category==="all"){
+      showAll();
+    }else{
+    updateContent(map[i]);
+    }
+  });
+});
+
+
+/* =========================
+   RENDER SIDEBAR
+========================= */
+function renderSidebar(activeIndex){
+
+  sidebarSlot.innerHTML="";
+
+  map.forEach((data,index)=>{
+
+    const icon=document.createElement("div");
+
+    icon.className="sidebar-icon";
+
+    if(index === activeIndex){
+      icon.classList.add("active");
+    }
+
+       /* 统一结构（不再用 all-btn） */
+    if(data.category==="all"){
+
+      icon.innerHTML=`
+      <span>ALL</span>
+        `;
+    }else{
+    icon.innerHTML=`
+    <img src="${data.icon}">
+    `;
+    }
+
+      /* CLICK SIDEBAR ICON */
+      icon.addEventListener("click",()=>{
+
+        document
+        .querySelectorAll(".sidebar-icon")
+        .forEach(e1 => e1.classList.remove("active"));
+
+        icon.classList.add("active");
+
+        if(data.category==="all"){
+          showAll();
+        }else{
+        updateContent(data);
+        }
+        });
+
+        sidebarSlot.appendChild(icon);
+      });
+  }
+
+/* =========================
+ UPDATE CONTENT
+========================= */
+function updateContent(data){
+
+  currentEvents=data.events || [];
+  currentPage=1;
+
+  renderEvents(currentEvents);
+
+}
+
+/* =========================
+   SHOW ALL
+========================= */
+function showAll(){
+
+  currentEvents=map
+  .filter(item=>item.category!=="all")
+  .flatMap(item=>item.events || []);
+
+  currentPage=1;
+
+  renderEvents(currentEvents);
+}
+
+/* =========================
+   RENDER EVENTS（核心渲染函数）
+========================= */
+function renderEvents(events){
+
+  const totalPages=Math.ceil(events.length / pageSize);
+
+
+   // EMPTY STATE
+   if(events.length===0){
+    noEvent.style.display="flex";
+    grid.innerHTML="";
+    pagination.innerHTML="";
+    return;
+   }
+
+   noEvent.style.display="none";
+
+   // 当前页数据
+   const start=(currentPage - 1)* pageSize;
+
+   const end=start + pageSize;
+   
+   const pageEvents=events.slice(start,end);
+
+ // 渲染卡片
+  grid.innerHTML=pageEvents.map(event=>`
+  <div class="event-card">
+    <h2 class="event-title">
+    ${event.title}
+    </h2>
+    <div class="divider"></div>
+    <p class="event-date">
+      ${event.date}
+      </p>
+      </div>
+      `).join("");
+
+      renderPagination(totalPages);
+
+ /* =========================
+     CLICK EVENT CARD
+  ========================= */
+document.querySelectorAll(".event-card")
+.forEach((card,index)=>{
+
+  card.addEventListener("click",()=>{
+
+    window.location.href=
+    pageEvents[index].link;
+  });
+});
+renderPagination(totalPages);
+}
+
+
+/* =========================
+   CLOSE BUTTON
+========================= */
+closeBtn.addEventListener("click",()=>{
+
+  eventList.classList.remove("hide");
+
+  sidebar.classList.remove("show");
+
+  closeBtn.classList.remove("show");
+
+  content.classList.remove("show");
+
+});
+
+function renderPagination(totalPages){
+  pagination.innerHTML="";
+
+  if(totalPages<=1)return;
+
+    // 《 -3页
+    const jumpPrev=document.createElement("button");
+    jumpPrev.innerText="《";
+    jumpPrev.addEventListener("click",()=>{
+      currentPage=Math.max(1, currentPage - 3);
+      renderEvents(currentEvents);
+    });
+    pagination.appendChild(jumpPrev);
+
+      // < 上一页
+const prev=document.createElement("button");
+prev.innerText="<"
+prev.addEventListener("click",()=>{
+  if(currentPage > 1){
+    currentPage--;
+    renderEvents(currentEvents);
+  }
+});
+pagination.appendChild(prev);
+
+ /* =========================
+     PAGE RANGE
+  ========================= */
+ // 页码范围（最多5个）
+ let startPage=Math.max(1, currentPage - 2);
+ let endPage=startPage + 4;
+
+   // PREVENT OVERFLOW
+ if(endPage > totalPages){
+
+  endPage=totalPages;
+
+  startPage=Math.max(1 , endPage - 4);
+ }
+
+   /* =========================
+     PAGE BUTTONS
+  ========================= */
+  for(let i=startPage; i<=endPage;i++){
+
+    const btn=document.createElement("button");
+
+    btn.innerText=i;
+
+     // ACTIVE PAGE
+     if(i === currentPage){
+      btn.classList.add("active-page");
+     }
+
+    // CLICK PAGE
+    btn.addEventListener("click",()=>{
+      currentPage=i;
+
+      renderEvents(currentEvents);
+    });
+
+    pagination.appendChild(btn);
+  }
+
+  /* =========================
+     DOTS + LAST PAGE
+  ========================= */
+  if(endPage < totalPages){
+    const dots=document.createElement('span');
+
+    dots.className="dots";
+
+    dots.innerText="......";
+
+    pagination.appendChild(dots);
+
+    const last=document.createElement("button");
+
+    last.innerText=totalPages;
+
+    last.addEventListener("click",()=>{
+
+      currentPage=totalPages;
+
+      renderEvents(currentEvents);
+    });
+
+    pagination.appendChild(last);
+  }
+
+    /* =========================
+     > NEXT PAGE
+  ========================= */
+  const next=document.createElement("button");
+
+  next.innerHTML=">";
+
+  next.addEventListener('click',()=>{
+
+    if(currentPage < totalPages){
+
+      currentPage++;
+
+      renderEvents(currentEvents);
+    }
+  });
+
+  pagination.appendChild(next);
+
+    /* =========================
+     》 JUMP NEXT 3 PAGE
+  ========================= */
+  const jumpNext=document.createElement("button");
+
+  jumpNext.innerText="》";
+
+  jumpNext.addEventListener("click",()=>{
+
+    currentPage=
+    Math.min(totalPages,currentPage + 3);
+
+    renderEvents(currentEvents);
+  });
+  pagination.appendChild(jumpNext);
+}
+</script>
+
+<div class="footer">
+  <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 10px;">
+<div>
+ <p>📌:26-1, Jalan KS 3, Kepayang Sentral, 70200 Seremban, Negeri Sembilan</p>
+   <p>© 2026 The Rare Den</p>
+  </div>
+
+  <div>
+<p>📞:012-837 3141</p>
+ <p>📧:therareden@gmail.com</p>
+  </div>
+  </div>
+</div>
+<script src="contact.js"></script>
+</body>
+</html>

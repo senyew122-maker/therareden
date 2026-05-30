@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Product</title>
+ <link rel="stylesheet" href="style.css">
+ <link rel="stylesheet" href="product.css">
+</head>
+<body>
+  
+  <div class="header-box">
+    <div class="logo-box">
+         <div style="display:flex;justify-content:space-between;align-items:center;padding:15px 30px;">
+    <img src="123/logo.jpg" class="logo">
+    <h1 class="title">The Rare Den Collectibles</h1>
+  </div>
+</div>
+   
+ <!-- 未登录状态 -->
+  <div id="authArea">
+ 
+ <a href="#" onclick="login()">
+  <div class="login">Sign up/Sign in</div>
+ </a>
+ </div>
+  
+   <!-- 已登录状态 -->
+    <div id="userArea" style="display: none;">
+
+      <div class="user-icons">
+
+        <span class="icon">🔔</span>
+        <span class="icon">🛒</span>
+
+         <!-- Profile（下拉） -->
+        <div class="profile-wrapper">
+
+        <span class="icon" onclick="toggleProfileMenu()">
+          👤 
+        </span>
+
+        <div id="profileMenu" class="profile-menu">
+
+          <div class="menu-item">Settings</div>
+          <div class="menu-item" onclick="logOut()">Logout</div>
+        </div>
+      </div>
+    </div>
+    </div>
+      </div>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="product.html">Product</a>
+  <a href="event.html">Event</a>
+
+  <div class="contact-wrapper">
+
+  <div class="contact-btn" id="contactBtn">
+    Contact
+    <span id="contact-arrow">▼</span>
+  </div>
+
+  <div class="contact-sidebar" id="contactSidebar">
+
+    <a href="https://www.facebook.com/profile.php?id=61580062782317"
+    target="_blank"
+    rel="noopener noreferrer">
+      <span>></span>
+      <span>Facebook</span>
+    </a>
+
+    <a href="https://www.instagram.com/theraredencollectibles/"
+    target="_blank"
+    rel="noopener noreferrer">
+      <span>></span>
+      <span>Instagram</span>
+    </a>
+
+    <a href="https://wa.me/60128373141"
+    target="_blank"
+    rel="noopener noreferrer">
+     <span>></span>
+      <span>Whatsapp</span>
+    </a>
+  </div>
+  </div>
+ </nav>
+
+
+  <div class="category-slider">
+  <button class="arrow left" onclick="prev()">❮</button>
+
+  <div class="logo-container" id="logoContainer">
+
+  <div class="logo-item active" onclick="selectCategory(0)">
+    <span>ALL</span>
+  </div>  
+
+    <div class="logo-item" onclick="selectCategory(1)">
+      <img src="123/Galogo.png">
+    </div>
+
+    <div class="logo-item" onclick="selectCategory(2)">
+      <img src="123/Ptcglogo.png">
+    </div>
+
+    <div class="logo-item" onclick="selectCategory(3)">
+      <img src="123/Oplogo.png">
+    </div>
+
+     <div class="logo-item" onclick="selectCategory(4)">
+      <img src="123/Ualogo.png">
+    </div>
+
+  </div>
+
+
+<button class="arrow right" onclick="next()">❯</button>
+
+</div>
+
+<main>
+
+ <div class="filter-bar">
+  <!-- 左边分类 -->
+<div class="sub-category">
+  <button class="filter-btn active" onclick="selectType(this,'all')">All</button>
+  <button class="filter-btn" onclick="selectType(this,'box')">Box</button>
+  <button class="filter-btn" onclick="selectType(this,'card')">Card</button>
+</div>
+
+<div class="search-bar">
+  <input type="text" id="searchInput" placeholder="Search">
+
+  <!-- 右边搜索 -->
+  <button id="searchBtn">
+    🔍
+  </button>
+</div>
+</div> 
+
+<div class="container">
+
+  <div class="card-grid" id="product-list"></div>
+
+  <div id="no-item">No Item</div>
+
+<!-- 分页按钮 -->
+<div class="pagination">
+<button onclick="prevPage()">⬅</button>
+<!-- ⭐ 页码显示 -->
+<span id="pageInfo"></span>
+
+<!-- ⭐ 下拉跳页 -->
+ <select id="pageSelect" onchange="jumpToPage()"></select>
+
+<button onclick="nextPage()"> ➡</button>
+</div>
+
+</div>
+
+</main>
+
+<script>
+const noItem=document.getElementById("no-item");
+let currentIndex=0;
+let currentType="all";
+let currentPage=1;
+const perPage=20;
+
+const categories=[
+  "ALL",
+  "Grand Archive",
+  "Pokemon Tcg",
+  "One Piece Tcg",
+  "Union Arena"
+];
+
+const product={
+  "Grand Archive":[
+  {name:"A",type:"box",price:"RM",img:""},
+  {name:"B",type:"card",price:"RM",img:""},
+  {name:"C",type:"box",price:"RM",img:""},
+  {name:"D",type:"card",price:"RM",img:""},
+  {name:"E",type:"box",price:"RM",img:""},
+  {name:"F",type:"card",price:"RM",img:""}
+],
+  "Pokemon Tcg":[
+    {name:"G",type:"box",price:"RM",img:""},
+    {name:"H",type:"card",price:"RM",img:""},
+     {name:"I",type:"box",price:"RM",img:""},
+    {name:"J",type:"card",price:"RM",img:""},
+     {name:"K",type:"box",price:"RM",img:""},
+    {name:"L",type:"card",price:"RM",img:""}
+],
+  "One Piece Tcg":[
+    {name:"M",type:"box",price:"RM",img:""},
+    {name:"N",type:"card",price:"RM",img:""},
+     {name:"O",type:"box",price:"RM",img:""},
+    {name:"P",type:"card",price:"RM",img:""},
+     {name:"Q",type:"box",price:"RM",img:""},
+    {name:"R",type:"card",price:"RM",img:""}
+],
+  "Union Arena":[
+    {name:"S",type:"box",price:"RM",img:""},
+    {name:"T",type:"card",price:"RM",img:""},
+     {name:"U",type:"box",price:"RM",img:""},
+    {name:"V",type:"card",price:"RM",img:""},
+     {name:"W",type:"box",price:"RM",img:""},
+    {name:"X",type:"card",price:"RM",img:""}
+  ]
+};
+
+// 切换选中
+function selectCategory(index){
+  currentIndex=index;
+  currentType="all";
+  currentPage=1;
+  updateActive();
+
+  // 🔥 加这段（重置下面按钮）
+document.querySelectorAll(".filter-btn").forEach(b=>{
+  b.classList.remove("active");
+});
+document.querySelector(".filter-btn").classList.add("active");
+
+  showProduct();
+}
+
+// 左右箭头
+function next(){
+  currentIndex++;
+  if(currentIndex>=categories.length){
+    currentIndex=0;
+  }
+  currentType = "all";
+  currentPage=1;
+
+updateActive();
+// 🔥 重置按钮UI（关键）
+document.querySelectorAll(".filter-btn").forEach(b=>{
+b.classList.remove("active");
+});
+document.querySelector(".filter-btn").classList.add("active");
+
+showProduct();
+}
+
+function prev(){
+  currentIndex--;
+  if(currentIndex<0){
+    currentIndex=categories.length-1;
+  }
+  currentType = "all";
+  currentPage=1;
+
+updateActive();
+// 🔥 重置按钮UI（关键）
+document.querySelectorAll(".filter-btn").forEach(b=>{
+b.classList.remove("active");
+});
+document.querySelector(".filter-btn").classList.add("active");
+
+showProduct();
+}
+
+function selectType(btn,type){
+  // 1️⃣ 记录当前分类
+  currentType=type;
+  currentPage=1;
+  render();
+
+    // 2️⃣ 切换按钮高亮
+    document.querySelectorAll(".filter-btn").forEach(b=>{
+      b.classList.remove("active");
+    });
+
+    btn.classList.add("active");
+  }
+
+  function render(){
+    showProduct();
+  }
+
+// 更新高亮
+function updateActive(){
+  let items=document.querySelectorAll(".logo-item");
+  
+  items.forEach(item=>item.classList.remove("active","near"));
+  items[currentIndex].classList.add("active");
+
+    // 左边
+    let prevIndex=currentIndex-1;
+    if(prevIndex<0){
+      prevIndex=items.length-1;
+    }
+    items[prevIndex].classList.add("near");
+
+     // 右边
+     let nextIndex=currentIndex+1;
+     if(nextIndex>=items.length){
+      nextIndex=0;
+     }
+     items[nextIndex].classList.add("near");
+}
+
+
+// 显示商品
+function getFilteredProducts(){
+  let category=categories[currentIndex];
+  let list=[];
+
+ let html = ""; 
+
+  if(category==="ALL"){
+
+ Object.values(product).forEach(arr=>{
+  list=list.concat(arr);
+ });
+
+ } else {
+  list=product[category];
+ }
+const keyword=
+document
+.getElementById("searchInput")
+.value
+.toLowerCase();
+
+return list.filter(p=>{
+
+  // 分类过滤
+  const matchType=
+  currentType==="all" ||
+  p.type===currentType;
+
+  // 搜索过滤
+  const matchSearch=
+  p.name
+  .toLowerCase()
+  .includes(keyword);
+
+  return matchType && matchSearch;
+});
+}
+
+// 显示商品（🔥唯一渲染函数）
+function showProduct(){
+  let list=getFilteredProducts();
+
+  let totalPages=
+  Math.max(1, Math.ceil(list.length/perPage));
+
+  let start =(currentPage-1)*perPage;
+  let end =start+perPage;
+  let currentItems=list.slice(start,end);
+
+   let html = ""; 
+
+   // 假设 currentItems 是你筛选后的商品
+   if(currentItems.length===0){
+    noItem.style.display="block"; // 显示 NO ITEM
+   }else{
+    noItem.style.display="none";// 隐藏
+   }
+
+// 正常渲染商品
+  currentItems.forEach(p=>{
+    html+=`<div class="card">
+      <img src="${p.img}" class="product-img">
+      <div class="product-name">${p.name}</div>
+      <div class="product-price">${p.price}</div>
+
+       <!-- ⭐ 数量控制 -->
+       <div class="qty-box">
+        <button onclick="changeQty(this,-1)">-</button>
+        <span class="qty">1</span>
+        <button onclick="changeQty(this,1)">+</button>
+      </div>
+      
+      <button class="buy-btn">Buy Now</button>
+      <button class="add-to-cart">Add to Cart</button>
+
+      </div>
+      `;
+  });
+ 
+  document.getElementById("product-list").innerHTML=html;
+  document.getElementById("pageInfo").innerText=
+  `${currentPage}/${totalPages}`;
+
+  updatePageInfo();
+}
+
+// 下一页
+function nextPage(){
+  let list=getFilteredProducts();
+  let totalPages=Math.ceil(list.length/perPage);
+
+  if(currentPage<totalPages){
+    currentPage++;
+    showProduct();
+  }
+}
+
+// 上一页
+function prevPage(){
+ currentPage=Math.max(1,currentPage-1);
+    showProduct();
+  }
+
+function jumpToPage(){
+  let page=parseInt(document.getElementById("pageSelect").value);
+  currentPage=page;
+  showProduct();
+}
+
+function updatePageInfo(){
+  let list=getFilteredProducts();
+  let totalPages=Math.ceil(list.length/perPage);
+
+  // 显示 1 / 10
+  document.getElementById("pageInfo").innerText= 
+  `${currentPage}/${totalPages}`;
+
+  // 下拉框
+  let select=document.getElementById("pageSelect");
+  select.innerHTML="";
+
+  for(let i=1; i<=totalPages;i++){
+    select.innerHTML+=`
+    <option value="${i}"${i===currentPage? 'selected':""}>
+      ${i}
+      </option>
+      `;
+  }
+}
+
+function changeQty(btn,value){
+  let qtySpan=btn.parentElement.querySelector(".qty");
+  let qty=parseInt(qtySpan.innerText);
+  qty+=value;
+
+  if(qty<1)qty=1;
+
+  qtySpan.innerText=qty;
+}
+
+/* =========================
+   SEARCH BUTTON
+========================= */
+document
+.getElementById("searchBtn")
+.addEventListener("click",()=>{
+
+  currentPage=1;
+  showProduct();
+
+});
+
+/* =========================
+   ENTER SEARCH
+========================= */
+document
+.getElementById("searchInput")
+.addEventListener("keypress",function(e){
+
+  if(e.key==="Enter"){
+
+    currentPage=1;
+    showProduct();
+  }
+})
+
+  // 初始加载
+showProduct();
+</script>
+
+
+
+<div class="footer">
+  <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 10px;">
+<div>
+ <p>📌:26-1, Jalan KS 3, Kepayang Sentral, 70200 Seremban, Negeri Sembilan</p>
+   <p>© 2026 The Rare Den</p>
+  </div>
+
+  <div>
+<p>📞:012-837 3141</p>
+ <p>📧:therareden@gmail.com</p>
+  </div>
+  </div>
+</div>
+<script src="contact.js"></script>
+</body>
+</html>

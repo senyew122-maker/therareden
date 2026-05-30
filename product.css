@@ -1,0 +1,299 @@
+.category-slider{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 40px auto;
+    width: 400px;
+}
+
+.logo-container{
+    display: flex;
+    justify-content: center;
+    gap:15px;
+    align-items: center;
+    transition:transform 0.4s ease;
+}
+
+.logo-item{
+    border:2px solid white;
+    padding: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: 0.3s;
+
+    transform: scale(0.8);
+    opacity: 0.5;
+}
+
+.logo-item img{
+    width: 80px;
+}
+
+.logo-item.active{
+    transform: scale(1.1);
+    opacity: 1;
+    border-color: yellow;
+}
+
+.logo-item.near{
+    transform: scale(0.9);
+    opacity: 0.8;
+}
+
+.arrow{
+    background: none;
+    border: none;
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+    padding:35px;
+}
+
+.arrow.left{
+    padding: 20px;
+}
+
+.arrow.right{
+    padding: 20px;
+}
+
+.logo-item span{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+      padding: 17px;
+    color: white;
+    font-weight: bolder;
+    font-size: 20px;
+   
+    text-shadow: 
+    -1px -1px 0 black,
+    1px -1px 0 black,
+    -1px 1px 0 black,
+    1px 1px 0 black;
+}
+
+.container{
+    width: 100%;
+}
+
+.sub-category{
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 20px;
+    padding: 0;
+    width: 100%;
+}
+
+.sub-category button{
+    position: relative;
+    padding: 10px 50px;
+}
+
+/* 在每个字后面加 | */
+.sub-category button::after{
+    content: "|";
+    position: absolute;
+    right: -10px;
+    color: #7e7e7e;
+}
+
+/* 最后一个不要 | */
+.sub-category button:last-child::after{
+    content: "";
+}
+
+.card-grid{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 10px;
+    margin-top: 30px;
+    justify-items: center;
+}
+
+.card{
+    width: 200px;;
+    padding: 10px;
+    height: 350px;
+
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(20px);
+    border: 5px solid rgb(199, 199, 255);
+    border-radius: 10px;
+    box-shadow: 0.2px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.filter-btn{
+    background: transparent;
+    border:1px solid transparent;
+    padding: 10px 30px;
+    margin-right:10px;
+    cursor:pointer;
+    font-size:15px;
+    font-weight:900;
+
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.filter-btn:hover{
+    background: #f5f5f5;
+    transform: translateY(-10px);
+}
+
+.filter-btn.active{
+    background: #fff8b0;
+    border:2px solid yellow;
+}
+
+.pagination{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 100px;
+    z-index: 999;
+}
+
+.pagination button{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 5px 15px;
+    margin: 5px;
+    cursor: pointer;
+    border: 2px outset black;
+    background: white;
+    font-size: 10px;
+    z-index: 1000;
+}
+
+main{
+    flex:1;
+padding-bottom:60px;
+}
+
+.product-img{
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.product-name{
+    font-weight: bold;
+    margin: 10px;
+}
+
+.product-price{
+    color: black;
+    margin: 5px 0;
+}
+
+.buy-btn{
+    background: black;
+    color: white;
+    border: none;
+    width: 150px;
+    height: 50px;
+    padding: 8px 18px;
+    border-radius: 10px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.buy-btn:hover{
+    background: orangered;
+}
+
+.qty-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:15px;
+    margin: 20px 0;
+}
+
+.qty-box button{
+    width: 25px;
+    height: 25px;
+    border: none;
+    background:#ddd;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.qty-box button:hover{
+    background: black;
+    color: white;
+}
+
+.qty{
+    min-width: 20px;
+    text-align: center;
+}
+
+.add-to-cart{
+width: 150px;
+height: 50px;
+background: black;
+color: white;
+padding: 8px 18px;
+ border-radius: 10px;
+margin:5px;
+cursor:  pointer;
+
+}
+
+.add-to-cart:hover{
+    background: orangered;
+}
+
+#no-item{
+ text-align: center;
+ font-size: 50px;
+ font-weight: bold;
+ margin-top: 40px;   
+ display: none; /* 默认先隐藏 */
+}
+
+.search-bar{
+display: flex;
+align-items: center;
+justify-content: center;
+
+border: 2px solid white;
+color: black;
+height: 50px;
+width: 300px;
+
+border-radius: 50px;
+margin-left: auto;
+}
+
+.search-bar input{
+    padding: 5px 20px;
+    
+    margin-left: 15px;
+}
+
+.search-bar button{
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-size: 15px;
+}
+
+.filter-bar{
+    display: flex;
+    align-items: center;
+}
