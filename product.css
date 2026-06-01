@@ -118,7 +118,8 @@
 .card{
     width: 200px;;
     padding: 10px;
-    height: 350px;
+    min-height: 350px;
+    height: auto;
 
     background: rgba(255,255,255,0.08);
     backdrop-filter: blur(20px);

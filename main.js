@@ -58,3 +58,24 @@ function toggleProfileMenu(){
 }
 
 updateAuthUI();
+
+function trackAuthClick(type){
+    gtag('event', 'auth_click',{
+        event_category:'auth',
+        event_label:type
+    });
+}
+
+function trackNav(page){
+    gtag('event', 'nav_click',{
+        event_category:'navigation',
+        event_label:page
+    });
+}
+
+function trackSocial(platform){
+    gtag('event', 'social_click',{
+        event_category:'social',
+        event_label:platform
+    });
+}
